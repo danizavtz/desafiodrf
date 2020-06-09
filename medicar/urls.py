@@ -17,6 +17,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'medicos', mview.MedicoViewSet, basename='medicos')
 router.register(r'especialidades', mview.EspecialidadeViewSet, basename='especialidades')
 router.register(r'consultas', aview.ConsultaViewSet, basename='consultas')
+router.register(r'agendas', aview.AgendaViewSet, basename='agendas')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

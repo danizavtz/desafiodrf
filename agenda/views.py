@@ -1,9 +1,9 @@
-from agenda.models import Consulta
+from agenda.models import Consulta, Agenda
 from rest_framework import viewsets
-from agenda.serializers import ConsultaSerializer
+from agenda.serializers import ConsultaSerializer, AgendaSerializer
 
-class ConsultaViewSet(viewsets.ModelViewSet):
-    serializer_class = ConsultaSerializer
+class AgendaViewSet(viewsets.ModelViewSet):
+    serializer_class = AgendaSerializer
     def get_queryset(self):
         queryset = Consulta.objects.all()
         medico = self.request.query_params.get('medico', None)
@@ -22,3 +22,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         if dataf is not None:
             queryset = queryset.filter(dia__lte=dataf)
         return queryset
+
+class ConsultaViewSet(viewsets.ModelViewSet):
+    serializer_class = ConsultaSerializer
+    
