@@ -12,3 +12,10 @@ class MedicoSerializer(serializers.ModelSerializer):
         model = Medico
         fields = ['id','nome', 'crm', 'email', 'telefone', 'especialidade']
 
+    def create(self, validated_data):
+        especialidades = validated_data.pop('especialidade')
+        medico = Medico.objects.create(**validated_data)
+        for e in especialidades:
+            Especialidades.objects.create(medico=medico, **e)
+        return medico
+

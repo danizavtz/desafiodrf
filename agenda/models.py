@@ -1,10 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 from medico.models import Medico
 
-class Agenda(models.Model):
+class Consulta(models.Model):
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE, blank=False)
     dia = models.DateField(blank=False, null=False)
+    horario =  models.TimeField()
+    data_agendamento = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-class Horario(models.Model):
-    horario = models.ForeignKey(Agenda, on_delete=models.CASCADE)
-    agendamento = models.DateField(blank=False, null=False)
+    class Meta:
+        ordering = ['dia', 'horario']
+        unique_together = ['id','dia']

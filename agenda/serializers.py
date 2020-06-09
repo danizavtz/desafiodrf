@@ -1,12 +1,9 @@
-from agenda.models import Agenda, Horario
+from agenda.models import Consulta
 from rest_framework import serializers
+from medico.serializers import MedicoSerializer
 
-class AgendaSerializer(serializers.ModelSerializer):
+class ConsultaSerializer(serializers.ModelSerializer):
+    medico = MedicoSerializer()
     class Meta:
-        model = Agenda
-        fields = ['id', 'medico', 'dia']
-
-class HorarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Horario
-        fields = ['id', 'horario', 'agendamento']
+        model = Consulta
+        fields = ['id', 'dia', 'horario', 'data_agendamento', 'medico']
