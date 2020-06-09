@@ -15,7 +15,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'medicos', mview.MedicoViewSet)
-router.register(r'especialidades', mview.EspecialidadeViewSet)
+router.register(r'especialidades', mview.EspecialidadeViewSet, basename='especialidades')
 router.register(r'agendas', aview.AgendaViewSet)
 router.register(r'horarios', aview.HorarioViewSet)
 

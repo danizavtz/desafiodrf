@@ -7,6 +7,12 @@ class MedicoViewSet(viewsets.ModelViewSet):
     serializer_class = MedicoSerializer
 
 class EspecialidadeViewSet(viewsets.ModelViewSet):
-    queryset = Especialidade.objects.all()
     serializer_class = EspecialidadeSerializer
+    def get_queryset(self): 
+        queryset = Especialidade.objects.all()
+        search = self.request.query_params.get('search', None)
+        if search is not None:
+            queryset = queryset.filter(nome__istartswith=search)
+        return queryset
+
 
