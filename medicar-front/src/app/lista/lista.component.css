@@ -1,0 +1,70 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-direction: row;
+}
+.wrapper1 {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    text-align: center;
+    margin-top: 10em;
+}
+.wrapper2 {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    text-align: center;
+}
+.headertable {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    text-align: justify;
+    font-size: 1em;
+    text-transform: uppercase;
+    color: #A8A8A8;
+}
+.bodytable {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    color: #444444;
+}
+.titulo {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.3em;
+    line-height: 21px;
+    color: #444444;
+}
+
+.desconectar {
+    color: #49B4BB;
+    background-color: #FFFFFF;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    padding: 0;
+    border: none;
+    background: none;
+}
+.consulta {
+    width: 138px;
+    height: 40px;
+    background: #49B4BB;
+    color: #FFFFFF;
+    border-radius: 4px;
+    font-family: Roboto;
+    padding: 0;
+    border: none;
+}
+
+.datastyle {
+    color: #49B4BB;
+    text-align: center;
+}

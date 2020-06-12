@@ -1,0 +1,43 @@
+<div class="wrapper1">
+    <h1>Nova consulta</h1>
+</div>
+<div class="wrapper">
+    <div class="item">
+        <form [formGroup]="dadosConsulta" (ngSubmit)="confirmarAcao()" >
+            <select id="especialidade" formControlName="especialidade" >
+                <option selected disabled>Especialidade</option>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <br>
+            <select id="medico" formControlName="medico">
+                <option selected disabled>Medico</option>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <br>
+            <select id="data" formControlName="data">
+                <option selected disabled>Data</option>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <br>
+            <select id="hora" formControlName="hora">
+                <option selected disabled>Hora</option>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <br>
+            <button class="cancelarbtn" (click)="cancelarAcao()">Cancelar</button>
+            <input class="submitinput" type="submit" value="Confirmar" [disabled]="!dadosConsulta.valid">
+        </form>
+    </div>
+</div>

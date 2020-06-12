@@ -25,4 +25,4 @@ class AgendaViewSet(viewsets.ModelViewSet):
 
 class ConsultaViewSet(viewsets.ModelViewSet):
     serializer_class = ConsultaSerializer
-    
+    queryset = Consulta.objects.all()

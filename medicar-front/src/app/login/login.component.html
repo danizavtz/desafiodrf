@@ -1,0 +1,29 @@
+<div class="wrapper1">
+    <img src="assets/Logo.png" />
+</div>
+<div class="wrapper">
+    <div class="item">
+        <form [formGroup]="dadosAcesso" (ngSubmit)="actionLogin()">
+            <input class="inputElement" id="login" type="text" placeholder="Email ou Login" formControlName="login" />
+            <div *ngIf="login.invalid && (login.dirty || login.touched)" class="alert">
+                <div *ngIf="login.errors.required">
+                    Email ou login é obrigatório.
+                </div>
+            </div>
+            <br>
+            <input class="inputElement" id="senha" type="password" placeholder="Senha" formControlName="senha" />
+            <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="alert">
+                <div *ngIf="senha.errors.required">
+                    Senha é obrigatório.
+                </div>
+            </div>
+            <br>
+            <label>
+                <input id="rememberme" type="checkbox" /> Lembrar minha senha
+            </label>
+            <br>
+            <button class="criarconta" (click)="actionCriarConta()">Criar Conta</button>
+            <input class="submitinput" id="submitinfo" type="submit" value="Acessar" [disabled]="!dadosAcesso.valid">
+        </form>
+    </div>
+</div>

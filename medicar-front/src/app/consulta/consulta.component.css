@@ -1,0 +1,64 @@
+input {
+    border: 1px solid #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 4px;
+    height: 40px;
+    margin: 5px;
+    color: #444444;
+    font-family: Roboto;
+}
+select {
+    background: #FFFFFF;
+    height: 40px;
+    border: 1px solid #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-family: Roboto;
+    margin: 10px;
+    width: 400px;
+}
+.submitinput {
+    width: 160px;
+    background: #49B4BB;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Roboto;
+}
+.cancelarbtn {
+    width: 160px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    color: #49B4BB;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Roboto;
+}
+
+.wrapper {
+    display: flex;
+    width: 100vw;
+    text-align: center;
+}
+.wrapper1 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10em;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+    font-family: 'Roboto', sans-serif;
+}
