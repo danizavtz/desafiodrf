@@ -15,11 +15,11 @@
       <th>Hora</th>
       <th>&nbsp;</th>
     </tr>
-    <tr class="bodytable">
-      <td>Cardiologia</td>
-      <td>Bill Gates</td>
-      <td>01/01/2020</td>
-      <td>13:00</td>
+    <tr class="bodytable" *ngFor="let c of lista">
+      <td>{{ c.especialidade.nome }}</td>
+      <td>{{ c.agenda.medico.nome }}</td>
+      <td>{{ c.data_agendamento }}</td>
+      <td>{{ c.horario }}</td>
       <td class="datastyle" (click)="desmarcarAction()">× Desmarcar</td>
     </tr>
   </table> 

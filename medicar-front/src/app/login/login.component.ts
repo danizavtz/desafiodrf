@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   dadosAcesso: FormGroup;
   
-  constructor(private router: Router  ) {
+  constructor(
+    private router: Router,
+    private loginservice: LoginService
+      ) {
     this.dadosAcesso = new FormGroup({
     login: new FormControl('', [Validators.required]),
     senha: new FormControl('', [Validators.required]),

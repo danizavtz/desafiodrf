@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { ListaComponent } from './lista/lista.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import { ListaComponent } from './lista/lista.component';
     LoginComponent,
     CadastroComponent,
     ConsultaComponent,
-    ListaComponent
+    ListaComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
