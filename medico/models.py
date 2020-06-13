@@ -8,9 +8,9 @@ class Especialidade(models.Model):
 class Medico(models.Model):
     nome = models.CharField(max_length=100, blank=False, null=False)
     crm = models.CharField(max_length=10, blank=False, null=False)
-    email = models.EmailField(max_length=100)
-    telefone = models.CharField(max_length=15)
-    especialidade = models.ForeignKey(Especialidade, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=100, blank=True)
+    telefone = models.CharField(max_length=15, blank=True)
+    especialidade = models.ForeignKey(Especialidade, on_delete=models.CASCADE, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nome
