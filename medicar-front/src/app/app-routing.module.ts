@@ -4,6 +4,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { LoginComponent } from './login/login.component';
 import { ConsultaComponent } from  './consulta/consulta.component';
 import { ListaComponent } from './lista/lista.component';
+// import { AuthGuard } from './helpers';
 
 
 const routes: Routes = [
@@ -12,7 +13,6 @@ const routes: Routes = [
   { path : 'lista', component: ListaComponent},
   { path: 'login', component: LoginComponent },
   { path : '', redirectTo: '/login', pathMatch: 'full'}
-
 ];
 
 @NgModule({

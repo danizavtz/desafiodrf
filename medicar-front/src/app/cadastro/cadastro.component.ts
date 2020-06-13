@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CadastroService } from '../cadastro.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -10,7 +11,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CadastroComponent implements OnInit {
   dadosCadastro: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private cadastroService: CadastroService) {
     this.dadosCadastro = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,6 +42,14 @@ ngOnInit(): void {
 }
 
 actionConfirmar() {
+  const val = this.dadosCadastro.value;
+  if (val.name && val.email && val.password) {
+    this.cadastroService.cadastrar(val.name, val.email, val.password, val.confirmPassword)
+      .subscribe(()=> {
+        console.log('contacriada')
+        this.router.navigateByUrl('login')
+      })
+  }
   console.log(this.dadosCadastro.value)
   console.log('confirmar')
 }

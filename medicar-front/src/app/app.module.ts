@@ -9,8 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { ListaComponent } from './lista/lista.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
+// import { TokenInterceptor, ErrorInterceptor } from './helpers';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MessagesComponent } from './messages/messages.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

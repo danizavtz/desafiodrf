@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
+import { AuthenticationService } from '../authentication.service'
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private loginservice: LoginService
+    private loginservice: AuthenticationService
       ) {
     this.dadosAcesso = new FormGroup({
     login: new FormControl('', [Validators.required]),
@@ -33,7 +33,14 @@ export class LoginComponent implements OnInit {
   }
 
   actionLogin() {
-    console.log(this.dadosAcesso.value)
+    const val = this.dadosAcesso.value;
+    if (val.login && val.senha) {
+      this.loginservice.login(val.login, val.senha)
+        .subscribe(() => {
+          console.log('login ok')
+          this.router.navigateByUrl('lista')
+        })
+    }
   }
 
   actionCriarConta() {
