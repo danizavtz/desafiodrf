@@ -17,7 +17,7 @@ class AgendaSerializer(serializers.ModelSerializer):
     horario = HorarioAgendamentoSimplificadoSerializer(read_only=True, many=True)
     class Meta:
         model = Agenda
-        fields = ['id', 'dia', 'medico', 'horario']
+        fields = ['id', 'medico',  'dia', 'horario']
 
 class ConsultaSerializer(serializers.ModelSerializer):
     horario = HorarioAgendamentoSerializer()
