@@ -5,11 +5,16 @@ from medico.serializers import MedicoSerializer
 class HorarioAgendamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = HorarioAgendamento
+        fields = ['id', 'horario',]
+
+class HorarioAgendamentoSimplificadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HorarioAgendamento
         fields = ['horario',]
 
 class AgendaSerializer(serializers.ModelSerializer):
     medico = MedicoSerializer()
-    horario = HorarioAgendamentoSerializer(many=True, read_only=True)
+    horario = HorarioAgendamentoSimplificadoSerializer(read_only=True, many=True)
     class Meta:
         model = Agenda
         fields = ['id', 'dia', 'medico', 'horario']

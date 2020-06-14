@@ -20,7 +20,7 @@ class HorarioAgendamento(models.Model):
 class Agenda(models.Model):
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE, blank=False)
     dia = models.DateField(blank=False, null=False, validators=[validate_dia_greater_than_date])
-    horario = models.ForeignKey(HorarioAgendamento, blank=False, on_delete=models.CASCADE)
+    horario = models.ManyToManyField(HorarioAgendamento, blank=False, related_name='horarios')
     class Meta:
         ordering = ['dia']
         unique_together = ['medico','dia']

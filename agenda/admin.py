@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Agenda, HorarioAgendamento
 
 class AgendaAdmin(admin.ModelAdmin):
-    list_display = ('medico','dia','horario')
+    list_display = ('medico','dia')
 
 class HorarioAgendamentoAdmin(admin.ModelAdmin):
     list_display = ('horario',)
