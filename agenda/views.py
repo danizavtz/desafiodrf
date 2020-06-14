@@ -1,18 +1,14 @@
-from agenda.models import Consulta, Agenda
+from agenda.models import Consulta, Agenda, HorarioAgendamento
 from rest_framework import viewsets
-from agenda.serializers import ConsultaSerializer, AgendaSerializer
+from agenda.serializers import ConsultaSerializer, AgendaSerializer, HorarioAgendamentoSerializer
 
 class AgendaViewSet(viewsets.ModelViewSet):
     serializer_class = AgendaSerializer
     def get_queryset(self):
-        queryset = Consulta.objects.all()
+        queryset = Agenda.objects.all()
         medico = self.request.query_params.get('medico', None)
         if medico is not None:
             queryset = queryset.filter(medico=medico)
-        
-        especialidade = self.request.query_params.get('especialidade', None)
-        if especialidade is not None:
-            queryset = queryset.filter(especialidade=especialidade)
         
         datai = self.request.query_params.get('data_inicio',None)
         if datai is not None:
@@ -26,3 +22,13 @@ class AgendaViewSet(viewsets.ModelViewSet):
 class ConsultaViewSet(viewsets.ModelViewSet):
     serializer_class = ConsultaSerializer
     queryset = Consulta.objects.all()
+
+class HorarioViewSet(viewsets.ModelViewSet):
+    serializer_class = HorarioAgendamentoSerializer
+
+    def get_queryset(self):
+        queryset = HorarioAgendamento.objects.all()
+        agenda = self.request.query_params.get('agenda', None)
+        if agenda is not None:
+            queryset = queryset.filter(agenda=agenda)
+        return queryset
