@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Consulta } from './consulta';
-// import { CONSULTAS } from './mock-consultas';
+import { Agenda } from './agenda';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
@@ -8,20 +7,19 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsultaService {
-  private consultaUsuarioUrl = 'http://localhost:8000/consultas/';
-  
-  constructor(private http: HttpClient) {  }
+export class AgendaService {
+  private agendaUrl = 'http://localhost:8000/agendas/';
+  constructor(private http: HttpClient) { }
 
-  getConsultas(): Observable<Consulta[]> {
-    return this.http.get<Consulta[]>(this.consultaUsuarioUrl, {
+  getAgendas(): Observable<Agenda[]>{
+    return this.http.get<Agenda[]>(this.agendaUrl, {
       headers: new HttpHeaders({
         'Authorization': `Token ${this.getUserAuthenticationToken()}`
       })
     })
-      .pipe(
-        catchError(this.handleError<Consulta[]>('getConsultas', []))
-      )
+    .pipe(
+      catchError(this.handleError<Agenda[]>('getAgendas', []))
+    )
   }
 
   private getUserAuthenticationToken() {

@@ -4,36 +4,29 @@
 <div class="wrapper">
     <div class="item">
         <form [formGroup]="dadosConsulta" (ngSubmit)="confirmarAcao()" >
-            <select id="especialidade" formControlName="especialidade" >
+            <select id="especialidade" formControlName="especialidade">
                 <option selected disabled>Especialidade</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                <option *ngFor="let e of especialidades" [ngValue]="e.id">
+                    {{ e.nome }}</option>
             </select>
             <br>
             <select id="medico" formControlName="medico">
                 <option selected disabled>Medico</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                <option *ngFor="let m of medicos" [ngValue]="m.id">
+                    {{ m.nome }}
+                </option>
             </select>
             <br>
             <select id="data" formControlName="data">
                 <option selected disabled>Data</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                <option *ngFor="a of agendas" [ngValue]="a.id">
+                    {{ a.dia }}</option>
             </select>
             <br>
             <select id="hora" formControlName="hora">
                 <option selected disabled>Hora</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                <option *ngFor="h of horarios" [ngValue]="h.id">
+                    {{ h.data }}</option>
             </select>
             <br>
             <button class="cancelarbtn" (click)="cancelarAcao()">Cancelar</button>
