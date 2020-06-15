@@ -39,6 +39,8 @@ class ConsultaViewSet(viewsets.ModelViewSet):
             c = Consulta.objects.create(horario=horarioobj, agenda=agendaobj, user=adminer)
             serialized_data = ConsultaSerializer(instance=c)
             return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(consulta_data._errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk=None):
         try:

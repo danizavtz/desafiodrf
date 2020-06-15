@@ -14,6 +14,7 @@ router.register(r'especialidades', mview.EspecialidadeViewSet, basename='especia
 router.register(r'consultas', aview.ConsultaViewSet, basename='consultas')
 router.register(r'agendas', aview.AgendaViewSet, basename='agendas')
 router.register(r'horarios', aview.HorarioViewSet, basename='horarios')
+router.register(r'users', rfviews.UserViewSet, basename='user')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -24,5 +25,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('login/', tokenview.obtain_auth_token, name='api-tokn-auth'),
+    path('cadastro/', csrf_exempt(rfviews.CreateUserView.as_view())),
     path('admin/', admin.site.urls),
 ]
