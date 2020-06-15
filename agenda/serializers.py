@@ -24,6 +24,7 @@ class ConsultaSerializer(serializers.ModelSerializer):
     def to_representation(self, obj):
         representation = super().to_representation(obj)
         agenda_representation = representation.pop('agenda')
+        agenda_representation.pop('horarios')
         for key in agenda_representation:
             representation[key] = agenda_representation[key]
 
