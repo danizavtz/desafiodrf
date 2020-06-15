@@ -5,7 +5,7 @@
 <div class="wrapper">
     <div class="item">
         
-        <form [formGroup]="dadosConsulta" (ngSubmit)="confirmarAcao()">
+        <form [formGroup]="dadosConsulta" (ngSubmit)="marcarConsultaAcao()">
             <select id="especialidade" formControlName="especialidade" (change)="onChangeEspecialidade($event.target.value)">
                 <option selected disabled>Especialidade</option>
                 <option *ngFor="let e of especialidades" [value]="e.id">

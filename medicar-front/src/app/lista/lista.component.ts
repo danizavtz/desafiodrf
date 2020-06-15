@@ -12,7 +12,6 @@ import { AuthenticationService } from '../authentication.service'
 export class ListaComponent implements OnInit {
   loading = false;
   lista: Consulta[];
-  selectedConsulta: Consulta;
   constructor(
     private router: Router,
     private consultaService: ConsultaService,
@@ -23,7 +22,7 @@ export class ListaComponent implements OnInit {
     this.getConsultas();
   }
 
-  getConsultas() : void {
+  getConsultas(): void {
     this.consultaService.getConsultas()
       .subscribe(consultas => this.lista = consultas);
   }
@@ -32,15 +31,13 @@ export class ListaComponent implements OnInit {
     this.router.navigate(['/consulta'])
   }
 
-  desmarcarAction() :void  {
-    console.log(this.selectedConsulta);
-    //this.consultaService.desmarcarConsulta(this.selectedConsulta.id);
-    this.getConsultas();
-  }
-
-  onSelect(consulta: Consulta): void {
-    this.selectedConsulta = consulta;
-    console.log('up')
+  desmarcarAction(idConsulta): void {
+    if (confirm('Tem certeza que deseja desmarcar a consulta?')) {
+      this.consultaService.desmarcarConsulta(idConsulta)
+        .subscribe(() => {
+          this.getConsultas();
+        })
+    }
   }
 
   deslogar() {

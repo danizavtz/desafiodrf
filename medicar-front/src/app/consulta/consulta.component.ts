@@ -9,6 +9,7 @@ import { Horario } from '../horario';
 import { EspecialidadesService } from '../especialidades.service';
 import { MedicoService } from '../medico.service';
 import { AgendaService } from '../agenda.service';
+import { ConsultaService } from '../consulta.service';
 
 @Component({
   selector: 'app-consulta',
@@ -25,7 +26,8 @@ export class ConsultaComponent implements OnInit {
     private router: Router,
     private especialidadeService: EspecialidadesService,
     private medicoService: MedicoService,
-    private agendaService: AgendaService) {
+    private agendaService: AgendaService,
+    private consultaService: ConsultaService) {
     this.dadosConsulta = new FormGroup({
       especialidade: new FormControl(''),
       medico: new FormControl(''),
@@ -40,8 +42,15 @@ export class ConsultaComponent implements OnInit {
   cancelarAcao() {
     this.router.navigate(['/lista'])
   }
-  confirmarAcao() {
+  marcarConsultaAcao() {
     console.log(this.dadosConsulta.value)
+    const val = this.dadosConsulta.value
+    if (val.agenda && val.hora) {
+      this.consultaService.marcarConsulta(val.agenda, val.hora)
+        .subscribe(() => {
+          this.router.navigateByUrl('lista')
+        })
+    }
   }
 
   getEspecialidades(): void {

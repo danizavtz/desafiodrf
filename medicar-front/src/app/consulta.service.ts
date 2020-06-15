@@ -19,7 +19,9 @@ export class ConsultaService {
         'Authorization': `Token ${this.getUserAuthenticationToken()}`
       })
     })
-      .pipe(
+      .pipe(map(data => {
+        return data;
+      }),
         catchError(this.handleError<Consulta[]>('getConsultas', []))
       )
   }
@@ -36,7 +38,8 @@ export class ConsultaService {
   }
 
   desmarcarConsulta(consultaId): any {
-    return this.http.delete(`${this.consultaUsuarioUrl}${consultaId}`, {
+    console.log(`${this.consultaUsuarioUrl}${consultaId}/`)
+    return this.http.delete<any>(`${this.consultaUsuarioUrl}${consultaId}/`, {
       headers: new HttpHeaders({
         'Authorization': `Token ${this.getUserAuthenticationToken()}`
       })
