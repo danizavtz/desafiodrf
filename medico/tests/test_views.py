@@ -94,20 +94,19 @@ class MedicoTest(TestCase):
         resp = client.get('http://localhost:8080/medicos/{}/'.format(med.id))
         self.assertEqual(resp.status_code, 200)
 
-    # def test_post_medico(self):
-    #     # espe = self.criar_especialidade()
-    #     # med = self.criar_medico()
-    #     client = RequestsClient()
-    #     m = {}
-    #     m['nome'] = 'meunome'
-    #     m['crm'] = '1234' 
-    #     m['email'] = 'a@a.com'
-    #     m['telefone'] = '123456'
-    #     espe = {'nome': 'nome'}
-    #     m['especialidade'] = espe
-    #     resp = client.post('http://localhost:8080/medicos/',m)
-    #     print(resp.content)
-    #     self.assertEqual(resp.status_code, 201)
+    def test_post_medico(self):
+        espe = self.criar_especialidade()
+        # med = self.criar_medico()
+        client = RequestsClient()
+        m = {}
+        m['nome'] = 'meunome'
+        m['crm'] = '1234' 
+        m['email'] = 'a@a.com'
+        m['telefone'] = '123456'
+        m['especialidade'] = espe
+        resp = client.post('http://localhost:8080/medicos/',m)
+        print(resp.content)
+        self.assertEqual(resp.status_code, 201)
 
     # def test_update_medico_nome(self):
     #     med = self.criar_medico()

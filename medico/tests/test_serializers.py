@@ -24,7 +24,7 @@ class MedicoTest(TestCase):
 
     def criar_medico(self, nome='meunome', crm='1234',email='a@a.com',telefone='123456'):
         e = self.criar_especialidade()
-        return Medico.objects.create(nome=nome,crm=crm,email=email,telefone=telefone, especialidade = e)
+        return Medico.objects.create(nome=nome,crm=crm,email=email,telefone=telefone, especialidade = Especialidade.objects.first())
 
     def setUp(self):
         self.medico = self.criar_medico()
