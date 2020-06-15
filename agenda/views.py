@@ -1,6 +1,11 @@
+from django.contrib.auth.models import User
+from django.http import Http404
+from rest_framework import status
+from rest_framework.response import Response
 from agenda.models import Consulta, Agenda, HorarioAgendamento
+from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
-from agenda.serializers import ConsultaSerializer, AgendaSerializer, HorarioAgendamentoSerializer
+from agenda.serializers import ConsultaSerializer, AgendaSerializer, HorarioAgendamentoSerializer, NovaConsultaSerializer
 
 class AgendaViewSet(viewsets.ModelViewSet):
     serializer_class = AgendaSerializer
@@ -21,7 +26,27 @@ class AgendaViewSet(viewsets.ModelViewSet):
 
 class ConsultaViewSet(viewsets.ModelViewSet):
     serializer_class = ConsultaSerializer
-    queryset = Consulta.objects.all()
+    def get_queryset(self):
+        queryset = Consulta.objects.all()
+        return queryset
+
+    def create(self, request):
+        consulta_data = NovaConsultaSerializer(data=request.data)
+        if consulta_data.is_valid():
+            agendaobj = Agenda.objects.get(pk=consulta_data.validated_data['agenda_id'])
+            horarioobj = HorarioAgendamento.objects.get(horario=consulta_data.validated_data['horario'])
+            adminer = User.objects.first()
+            c = Consulta.objects.create(horario=horarioobj, agenda=agendaobj, user=adminer)
+            serialized_data = ConsultaSerializer(instance=c)
+            return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+
+    def destroy(self, request, pk=None):
+        try:
+            c = Consulta.objects.get(pk=pk)
+            c.delete()
+            return Response(None, status=status.HTTP_204_NO_CONTENT)
+        except Consulta.DoesNotExist:
+            raise Http404
 
 class HorarioViewSet(viewsets.ModelViewSet):
     serializer_class = HorarioAgendamentoSerializer
