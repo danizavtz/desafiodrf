@@ -26,6 +26,9 @@ class Agenda(models.Model):
         unique_together = ['medico','dia']
 
 class Consulta(models.Model):
-    horario = models.OneToOneField(HorarioAgendamento,on_delete=models.CASCADE, blank=False)
+    horario = models.ForeignKey(HorarioAgendamento,on_delete=models.CASCADE, blank=False)
+    agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, blank=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     data_agendamento = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        unique_together = ['horario', 'agenda']
