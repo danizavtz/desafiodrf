@@ -31,7 +31,7 @@
                     {{ h.horario }}</option>
             </select>
             <br>
-            <button class="cancelarbtn" (click)="cancelarAcao()">Cancelar</button>
+            <button type="button" class="cancelarbtn" (click)="cancelarAcao()">Cancelar</button>
             <input class="submitinput" type="submit" value="Confirmar" [disabled]="!dadosConsulta.valid">
         </form>
     </div>

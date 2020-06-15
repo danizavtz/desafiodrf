@@ -27,7 +27,7 @@
             <br>
             <input id="confirmarsenha" type="password" placeholder="Confirmar Senha" formControlName="confirmPassword">
             <br>
-            <button class="cancelarbtn" (click)="actionCancelar()">Cancelar</button>
+            <button type="button" class="cancelarbtn" (click)="actionCancelar()">Cancelar</button>
             <input class="submitinput" id="submitinfo" type="submit" value="Confirmar" [disabled]="!dadosCadastro.valid">
         </form>
     </div>
