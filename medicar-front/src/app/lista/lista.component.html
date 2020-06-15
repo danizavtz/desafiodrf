@@ -1,25 +1,26 @@
 <div class="wrapper1">
-  <img src="assets/Logo.png" />
-  <p *ngIf="usuario">{{ usuario.username }}</p>
-  <button class="desconectar" (click)="deslogar()">Desconectar</button>
+  <span><img src="assets/logo.png" />Medicar</span><span class="currentLoggedUser"
+    *ngIf="usuario">{{ usuario.username }}</span><span class="desconectar" (click)="deslogar()">Desconectar</span>
 </div>
-<div class="wrapper">
-  <p class="titulo">Consulta Clínica</p>
-  <button class="consulta" (click)="novaConsultaAction()">+ Nova Consulta</button>
+<div class="boxshadoweffect">
+  <div class="wrapper">
+    <p class="titulo">Consulta Clínica</p>
+    <button class="consulta" (click)="novaConsultaAction()">+&nbsp;Nova&nbsp;Consulta</button>
+  </div>
+  <table>
+    <tr class="headertable">
+      <th>Especialidade</th>
+      <th>Nome</th>
+      <th>Data</th>
+      <th>Hora</th>
+      <th>&nbsp;</th>
+    </tr>
+    <tr class="bodytable" *ngFor="let c of lista">
+      <td>{{ c.medico.especialidade.nome }}</td>
+      <td>{{ c.medico.nome }}</td>
+      <td>{{ c.dia | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ c.horario }}</td>
+      <td class="datastyle" (click)="desmarcarAction(c.id)">× Desmarcar</td>
+    </tr>
+  </table>
 </div>
-<table style="width:100%">
-  <tr class="headertable">
-    <th>Especialidade</th>
-    <th>Nome</th>
-    <th>Data</th>
-    <th>Hora</th>
-    <th>&nbsp;</th>
-  </tr>
-  <tr class="bodytable" *ngFor="let c of lista">
-    <td>{{ c.medico.especialidade.nome }}</td>
-    <td>{{ c.medico.nome }}</td>
-    <td>{{ c.dia | date: 'dd/MM/yyyy' }}</td>
-    <td>{{ c.horario }}</td>
-    <td class="datastyle" (click)="desmarcarAction(c.id)">× Desmarcar</td>
-  </tr>
-</table>

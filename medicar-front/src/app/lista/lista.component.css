@@ -1,70 +1,83 @@
 .wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     text-align: center;
     flex-direction: row;
+}
+.currentLoggedUser {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    color: #A8A8A8;
 }
 .wrapper1 {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
-    text-align: center;
     margin-top: 10em;
+    color: #444444;
+    height: 4em;
+    font-weight: 800;
+    clear: both;
+    font-size: 1em;
 }
-.wrapper2 {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    text-align: center;
+.boxshadoweffect {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    padding: 0.4em;
 }
 .headertable {
-    font-family: Roboto;
-    font-style: normal;
     font-weight: bold;
     text-align: justify;
-    font-size: 1em;
+    font-size: .85em;
     text-transform: uppercase;
     color: #A8A8A8;
 }
 .bodytable {
-    font-family: Roboto;
-    font-style: normal;
     font-weight: normal;
     font-size: 1em;
     color: #444444;
+    height: 2.5em;
+}
+tr:nth-child(even) {
+    background-color: #F8F8F8;
 }
 .titulo {
-    font-family: Roboto;
-    font-style: normal;
     font-weight: bold;
-    font-size: 1.3em;
-    line-height: 21px;
+    font-size: 1.5em;
     color: #444444;
 }
 
 .desconectar {
     color: #49B4BB;
-    background-color: #FFFFFF;
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 1em;
-    padding: 0;
-    border: none;
-    background: none;
+    float: right;
+    cursor: pointer;
 }
 .consulta {
     width: 138px;
-    height: 40px;
+    height: 30px;
     background: #49B4BB;
     color: #FFFFFF;
     border-radius: 4px;
-    font-family: Roboto;
     padding: 0;
     border: none;
+    font-weight: 800;
 }
 
 .datastyle {
     color: #49B4BB;
     text-align: center;
+}
+
+img { 
+    width: 25px;
+    height: 25px;
+}
+
+table {
+    width: 100%;
 }
