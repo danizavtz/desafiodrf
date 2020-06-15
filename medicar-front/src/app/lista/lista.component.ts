@@ -11,7 +11,6 @@ import { AuthenticationService } from '../authentication.service'
   styleUrls: ['./lista.component.css']
 })
 export class ListaComponent implements OnInit {
-  loading = false;
   lista: Consulta[];
   usuario: Usuario;
   constructor(
@@ -20,7 +19,6 @@ export class ListaComponent implements OnInit {
     private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.loading = true;
     this.getConsultas();
     this.getCurrentLoggedUser();
   }

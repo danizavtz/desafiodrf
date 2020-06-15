@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
     if (val.login && val.senha) {
       this.loginservice.login(val.login, val.senha)
         .subscribe(() => {
-          console.log('login ok')
           this.router.navigateByUrl('lista')
         })
     }

@@ -1,6 +1,6 @@
 <div class="wrapper1">
   <img src="assets/Logo.png" />
-  <p>{{ usuario.username }}</p>
+  <p *ngIf="usuario">{{ usuario.username }}</p>
   <button class="desconectar" (click)="deslogar()">Desconectar</button>
 </div>
 <div class="wrapper">
