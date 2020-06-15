@@ -3,7 +3,6 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from agenda.models import Consulta, Agenda, HorarioAgendamento
-from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from agenda.serializers import ConsultaSerializer, AgendaSerializer, HorarioAgendamentoSerializer, NovaConsultaSerializer
 
@@ -27,7 +26,8 @@ class AgendaViewSet(viewsets.ModelViewSet):
 class ConsultaViewSet(viewsets.ModelViewSet):
     serializer_class = ConsultaSerializer
     def get_queryset(self):
-        queryset = Consulta.objects.all()
+        currentUser = self.request.user
+        queryset = Consulta.objects.filter(user=currentUser)
         return queryset
 
     def create(self, request):
@@ -35,8 +35,8 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         if consulta_data.is_valid():
             agendaobj = Agenda.objects.get(pk=consulta_data.validated_data['agenda_id'])
             horarioobj = HorarioAgendamento.objects.get(horario=consulta_data.validated_data['horario'])
-            adminer = User.objects.first()
-            c = Consulta.objects.create(horario=horarioobj, agenda=agendaobj, user=adminer)
+            currentUser = User.objects.get(username=self.request.user)
+            c = Consulta.objects.create(horario=horarioobj, agenda=agendaobj, user=currentUser)
             serialized_data = ConsultaSerializer(instance=c)
             return Response(serialized_data.data, status=status.HTTP_201_CREATED)
         else:
