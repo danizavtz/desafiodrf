@@ -7,26 +7,26 @@
         
         <form [formGroup]="dadosConsulta" (ngSubmit)="marcarConsultaAcao()">
             <select id="especialidade" formControlName="especialidade" (change)="onChangeEspecialidade($event.target.value)">
-                <option selected disabled>Especialidade</option>
+                <option value="" selected disabled>Especialidade</option>
                 <option *ngFor="let e of especialidades" [value]="e.id">
                     {{ e.nome }}</option>
             </select>
             <br>
             <select id="medico" formControlName="medico" (change)="onChangeMedico($event.target.value)">
-                <option selected disabled>Medico</option>
+                <option value="" selected disabled>Medico</option>
                 <option *ngFor="let m of medicos" [value]="m.id">
                     {{ m.nome }}
                 </option>
             </select>
              <br>
             <select id="agenda" formControlName="agenda" (change)="onChangeAgenda($event.target.value)">
-                <option selected disabled>Data</option>
+                <option value="" selected disabled>Data</option>
                 <option *ngFor="let a of agendas" [value]="a.id">
                     {{ a.dia }}</option>
             </select>
             <br>
             <select id="hora" formControlName="hora">
-                <option selected disabled>Hora</option>
+                <option value="" selected disabled>Hora</option>
                 <option *ngFor="let h of horarios" [value]="h.horario">
                     {{ h.horario }}</option>
             </select>
