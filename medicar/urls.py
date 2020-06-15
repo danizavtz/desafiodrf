@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken import views as tokenview
-from quickstart import views as rfviews
+from usuarios import views as rfviews
 from medico import views as mview
 from agenda import views as aview
 from django.contrib import admin
