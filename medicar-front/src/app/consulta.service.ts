@@ -10,8 +10,8 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class ConsultaService {
   private consultaUsuarioUrl = 'http://localhost:8000/consultas/';
-  
-  constructor(private http: HttpClient) {  }
+
+  constructor(private http: HttpClient) { }
 
   getConsultas(): Observable<Consulta[]> {
     return this.http.get<Consulta[]>(this.consultaUsuarioUrl, {
@@ -21,6 +21,28 @@ export class ConsultaService {
     })
       .pipe(
         catchError(this.handleError<Consulta[]>('getConsultas', []))
+      )
+  }
+
+  marcarConsulta(agenda, horario): Observable<Consulta> {
+    return this.http.post<Consulta>(this.consultaUsuarioUrl, { 'agenda_id': agenda, 'horario': horario }, {
+      headers: new HttpHeaders({
+        'Authorization': `Token ${this.getUserAuthenticationToken()}`
+      })
+    })
+      .pipe(
+        catchError(this.handleError<Consulta>('marcarConsulta'))
+      )
+  }
+
+  desmarcarConsulta(consultaId): any {
+    return this.http.delete(`${this.consultaUsuarioUrl}${consultaId}`, {
+      headers: new HttpHeaders({
+        'Authorization': `Token ${this.getUserAuthenticationToken()}`
+      })
+    })
+      .pipe(
+        catchError(this.handleError<any>('desmarcarConsulta'))
       )
   }
 

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import { Especialidade } from '../especialidade';
 import { Medico } from '../medico';
 import { Agenda } from '../agenda';
-import { Horario} from '../horario';
+import { Horario } from '../horario';
 import { EspecialidadesService } from '../especialidades.service';
 import { MedicoService } from '../medico.service';
-import { AgendaService} from '../agenda.service';
-import { HorarioService } from '../horario.service';
+import { AgendaService } from '../agenda.service';
 
 @Component({
   selector: 'app-consulta',
@@ -21,52 +21,60 @@ export class ConsultaComponent implements OnInit {
   medicos: Medico[];
   agendas: Agenda[];
   horarios: Horario[];
-
   constructor(
-    private router:  Router,
+    private router: Router,
     private especialidadeService: EspecialidadesService,
     private medicoService: MedicoService,
-    private agendaService: AgendaService,
-    private horarioService: HorarioService) {
-      this.dadosConsulta = new FormGroup({
-        especialidade: new FormControl(''),
-        medico: new FormControl(''),
-        data: new FormControl(''),
-        hora: new FormControl('')
-      })
-     }
+    private agendaService: AgendaService) {
+    this.dadosConsulta = new FormGroup({
+      especialidade: new FormControl(''),
+      medico: new FormControl(''),
+      agenda: new FormControl(''),
+      hora: new FormControl('')
+    })
+  }
 
   ngOnInit(): void {
     this.getEspecialidades();
-    this.getMedicos();
-    this.getAgendas();
-    this.getHorario();
   }
-  cancelarAcao(){
+  cancelarAcao() {
     this.router.navigate(['/lista'])
   }
-  confirmarAcao(){
+  confirmarAcao() {
     console.log(this.dadosConsulta.value)
   }
-  
-  getEspecialidades() : void {
+
+  getEspecialidades(): void {
     this.especialidadeService.getEspecialidades()
       .subscribe(especialidades => this.especialidades = especialidades);
   }
 
-  getMedicos(): void {
-    this.medicoService.getMedicos()
+  getMedicos(especialidade): void {
+    this.medicoService.getMedicos(especialidade)
       .subscribe(medicos => this.medicos = medicos);
   }
 
-  getAgendas(): void {
-    this.agendaService.getAgendas()
+  getAgendas(idMedico): void {
+    this.agendaService.getAgendas(idMedico)
       .subscribe(agendas => this.agendas = agendas);
   }
 
-  getHorario(): void {
-    this.horarioService.getHorarios()
-      .subscribe(horarios => this.horarios = horarios);
+  getHorariosAgenda(selecaoIdAgenda): Observable<Horario[]> {
+    return of(this.agendas.find(item => {
+      return item.id = selecaoIdAgenda
+    }).horario);
+  }
+
+  onChangeEspecialidade(valor): void {
+    this.getMedicos(valor)
+  }
+  onChangeMedico(selecaoIdMedico): void {
+    this.getAgendas(selecaoIdMedico);
+  }
+
+  onChangeAgenda(selecaoIdAgenda): void {
+    this.getHorariosAgenda(selecaoIdAgenda)
+      .subscribe(horarios => this.horarios = horarios)
   }
 
 }

@@ -14,11 +14,14 @@ export class MedicoService {
     private http: HttpClient
   ) { }
 
-  getMedicos(): Observable<Medico[]> {
+  getMedicos(especialidade): Observable<Medico[]> {
     return this.http.get<Medico[]>(this.medicoUrl, {
       headers: new HttpHeaders({
         'Authorization': `Token ${this.getUserAuthenticationToken()}`
-      })
+      }),
+      params: {
+        'especialidade': especialidade
+      }
     })
       .pipe(
         catchError(this.handleError<Medico[]>('getMedicos', []))

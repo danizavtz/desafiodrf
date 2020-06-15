@@ -1,32 +1,34 @@
 <div class="wrapper1">
     <h1>Nova consulta</h1>
 </div>
+
 <div class="wrapper">
     <div class="item">
-        <form [formGroup]="dadosConsulta" (ngSubmit)="confirmarAcao()" >
-            <select id="especialidade" formControlName="especialidade">
+        
+        <form [formGroup]="dadosConsulta" (ngSubmit)="confirmarAcao()">
+            <select id="especialidade" formControlName="especialidade" (change)="onChangeEspecialidade($event.target.value)">
                 <option selected disabled>Especialidade</option>
-                <option *ngFor="let e of especialidades" [ngValue]="e.id">
+                <option *ngFor="let e of especialidades" [value]="e.id">
                     {{ e.nome }}</option>
             </select>
             <br>
-            <select id="medico" formControlName="medico">
+            <select id="medico" formControlName="medico" (change)="onChangeMedico($event.target.value)">
                 <option selected disabled>Medico</option>
-                <option *ngFor="let m of medicos" [ngValue]="m.id">
+                <option *ngFor="let m of medicos" [value]="m.id">
                     {{ m.nome }}
                 </option>
             </select>
-            <br>
-            <select id="data" formControlName="data">
+             <br>
+            <select id="agenda" formControlName="agenda" (change)="onChangeAgenda($event.target.value)">
                 <option selected disabled>Data</option>
-                <option *ngFor="a of agendas" [ngValue]="a.id">
+                <option *ngFor="let a of agendas" [value]="a.id">
                     {{ a.dia }}</option>
             </select>
             <br>
             <select id="hora" formControlName="hora">
                 <option selected disabled>Hora</option>
-                <option *ngFor="h of horarios" [ngValue]="h.id">
-                    {{ h.data }}</option>
+                <option *ngFor="let h of horarios" [value]="h.horario">
+                    {{ h.horario }}</option>
             </select>
             <br>
             <button class="cancelarbtn" (click)="cancelarAcao()">Cancelar</button>
