@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Consulta } from './consulta';
-// import { CONSULTAS } from './mock-consultas';
+import { Usuario } from './usuario';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class ConsultaService {
   private consultaUsuarioUrl = 'http://localhost:8000/consultas/';
+  private currentUserUrl = 'http://localhost:8000/users/';
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,19 @@ export class ConsultaService {
       }),
         catchError(this.handleError<Consulta[]>('getConsultas', []))
       )
+  }
+
+  getCurrentUserData(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.currentUserUrl, {
+      headers: new HttpHeaders({
+        'Authorization': `Token ${this.getUserAuthenticationToken()}`
+      })
+    })
+    .pipe(map(data => {
+      return data;
+    }),
+      catchError(this.handleError<Usuario[]>('marcarConsulta'))
+    )
   }
 
   marcarConsulta(agenda, horario): Observable<Consulta> {

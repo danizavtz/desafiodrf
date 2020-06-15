@@ -6,11 +6,10 @@ from quickstart.serializers import UserSerializer, GroupSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    def get_queryset(self):
+        queryset = User.objects.filter(username=self.request.user)
+        return queryset
 
 class CreateUserView(CreateAPIView):
 

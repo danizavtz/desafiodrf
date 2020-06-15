@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConsultaService } from '../consulta.service';
 import { Consulta } from '../consulta';
+import { Usuario } from '../usuario';
 import { AuthenticationService } from '../authentication.service'
 
 @Component({
@@ -12,6 +13,7 @@ import { AuthenticationService } from '../authentication.service'
 export class ListaComponent implements OnInit {
   loading = false;
   lista: Consulta[];
+  usuario: Usuario;
   constructor(
     private router: Router,
     private consultaService: ConsultaService,
@@ -20,11 +22,17 @@ export class ListaComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.getConsultas();
+    this.getCurrentLoggedUser();
   }
 
   getConsultas(): void {
     this.consultaService.getConsultas()
       .subscribe(consultas => this.lista = consultas);
+  }
+
+  getCurrentLoggedUser(): void {
+    this.consultaService.getCurrentUserData()
+      .subscribe(usuarios => this.usuario = usuarios.shift())
   }
 
   novaConsultaAction(): void {
