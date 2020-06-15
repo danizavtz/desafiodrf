@@ -13,7 +13,7 @@ export class CadastroService {
   ) { }
 
   cadastrar(nome, email, senha, confirmarsenha) {
-    return this.http.post<any>('http://localhost:8000/cadastro/', {nome, email, senha, confirmarsenha})
+    return this.http.post<any>('http://localhost:8000/cadastro/', {username: nome, email, password: senha, confirmarsenha})
       .pipe(
         catchError(this.handleError)
       )

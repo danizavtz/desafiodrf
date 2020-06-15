@@ -16,9 +16,9 @@
     <th>&nbsp;</th>
   </tr>
   <tr class="bodytable" *ngFor="let c of lista">
-    <td>{{ c.agenda.medico.especialidade.nome }}</td>
-    <td>{{ c.agenda.medico.nome }}</td>
-    <td>{{ c.data_agendamento }}</td>
+    <td>{{ c.medico.especialidade.nome }}</td>
+    <td>{{ c.medico.nome }}</td>
+    <td>{{ c.dia | date: 'dd/MM/yyyy' }}</td>
     <td>{{ c.horario }}</td>
     <td class="datastyle" (click)="desmarcarAction(c.id)">× Desmarcar</td>
   </tr>
