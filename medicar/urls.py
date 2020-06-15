@@ -13,7 +13,6 @@ router.register(r'medicos', mview.MedicoViewSet, basename='medicos')
 router.register(r'especialidades', mview.EspecialidadeViewSet, basename='especialidades')
 router.register(r'consultas', aview.ConsultaViewSet, basename='consultas')
 router.register(r'agendas', aview.AgendaViewSet, basename='agendas')
-router.register(r'horarios', aview.HorarioViewSet, basename='horarios')
 router.register(r'users', rfviews.UserViewSet, basename='user')
 
 # Wire up our API using automatic URL routing.

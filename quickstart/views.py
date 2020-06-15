@@ -1,8 +1,8 @@
 from rest_framework import permissions
 from rest_framework.generics import CreateAPIView
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from rest_framework import viewsets
-from quickstart.serializers import UserSerializer, GroupSerializer
+from quickstart.serializers import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -12,16 +12,8 @@ class UserViewSet(viewsets.ModelViewSet):
         return queryset
 
 class CreateUserView(CreateAPIView):
-
     model = User
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = UserSerializer
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer

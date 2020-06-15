@@ -49,13 +49,3 @@ class ConsultaViewSet(viewsets.ModelViewSet):
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except Consulta.DoesNotExist:
             raise Http404
-
-class HorarioViewSet(viewsets.ModelViewSet):
-    serializer_class = HorarioAgendamentoSerializer
-
-    def get_queryset(self):
-        queryset = HorarioAgendamento.objects.all()
-        agenda = self.request.query_params.get('agenda', None)
-        if agenda is not None:
-            queryset = queryset.filter(agenda=agenda)
-        return queryset
