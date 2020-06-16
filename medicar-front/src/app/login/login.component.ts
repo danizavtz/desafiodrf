@@ -10,16 +10,17 @@ import { AuthenticationService } from '../authentication.service'
 })
 export class LoginComponent implements OnInit {
   dadosAcesso: FormGroup;
-  tipoInputPassword:string;
-  
+  tipoInputPassword: string;
+  valorCheckBoxLembrarSenha: boolean;
+
   constructor(
     private router: Router,
     private loginservice: AuthenticationService
-      ) {
+  ) {
     this.dadosAcesso = new FormGroup({
-    login: new FormControl('', [Validators.required]),
-    senha: new FormControl('', [Validators.required]),
-  });
+      login: new FormControl('', [Validators.required]),
+      senha: new FormControl('', [Validators.required]),
+    });
   }
 
   get login() {
@@ -29,9 +30,38 @@ export class LoginComponent implements OnInit {
   get senha() {
     return this.dadosAcesso.get('senha');
   }
-  
+
   ngOnInit(): void {
     this.tipoInputPassword = 'password';
+    this.verificarOpcaoLembrarSenha();
+  }
+
+  verificarOpcaoLembrarSenha() {
+    const currentOption = localStorage.getItem('lembrarsenha')
+    if (currentOption === null) {
+      localStorage.setItem('lembrarsenha', 'false')
+      this.valorCheckBoxLembrarSenha = false
+    } else {
+      let opt = JSON.parse(currentOption)
+      if (opt === true) {
+        this.colocarValoresCredenciaisForm();
+      }
+      this.valorCheckBoxLembrarSenha = opt
+
+    }
+  }
+  gravarCredenciaisAcesso() {
+    localStorage.setItem('login', this.dadosAcesso.value.login);
+    localStorage.setItem('senha', btoa(this.dadosAcesso.value.senha));
+  }
+
+  colocarValoresCredenciaisForm() {
+    try {
+      this.dadosAcesso.get('login').setValue(localStorage.getItem('login'));
+      this.dadosAcesso.get('senha').setValue(atob(localStorage.getItem('senha')));
+    } catch (e) {
+      console.error('houve um erro ao utilizar credenciais salvas. Detalhe: ' + e)
+    }
   }
 
   actionLogin() {
@@ -39,6 +69,9 @@ export class LoginComponent implements OnInit {
     if (val.login && val.senha) {
       this.loginservice.login(val.login, val.senha)
         .subscribe(() => {
+          if (this.valorCheckBoxLembrarSenha) {
+            this.gravarCredenciaisAcesso()
+          }
           this.router.navigateByUrl('lista')
         })
     }
@@ -50,6 +83,15 @@ export class LoginComponent implements OnInit {
 
   actionMostrarSenha() {
     this.tipoInputPassword = this.tipoInputPassword === 'password' ? 'text' : 'password'
+  }
+
+  setarStatusLembrarSenha() {
+    this.valorCheckBoxLembrarSenha = !this.valorCheckBoxLembrarSenha;
+    if (this.valorCheckBoxLembrarSenha === true) {
+      localStorage.setItem('lembrarsenha', 'true')
+    } else {
+      localStorage.setItem('lembrarsenha', 'false')
+    }
   }
 
 }
