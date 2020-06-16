@@ -40,6 +40,11 @@
                         <img src="assets/olho.png" alt="" (click)="actionShowConfirmPassword()">
                     </span>
                 </div>
+                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert">
+                    <div *ngIf="confirmPassword.errors.notEquivalent">
+                        Senhas não conferem
+                    </div>
+                </div>
                 <br>
             </div>
             <button type="button" class="cancelarbtn" (click)="actionCancelar()">Cancelar</button>

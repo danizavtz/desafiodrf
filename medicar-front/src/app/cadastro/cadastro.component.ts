@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { CadastroService } from '../cadastro.service';
 
 @Component({
@@ -21,8 +21,22 @@ export class CadastroComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required])
-    })
+    });
+    this.dadosCadastro.setValidators(this.checkpasswordValidator());
   }
+
+  private checkpasswordValidator(): ValidatorFn {
+    return (group: FormGroup): ValidationErrors => {
+      const control1 = group.controls['password'];
+      const control2 = group.controls['confirmPassword'];
+      if (control1.value !== control2.value) {
+        control2.setErrors({ notEquivalent: true });
+      } else {
+        control2.setErrors(null);
+      }
+      return;
+    }
+  };
 
   get name() {
     return this.dadosCadastro.get('name');
