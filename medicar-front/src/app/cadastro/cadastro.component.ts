@@ -20,54 +20,51 @@ export class CadastroComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
-        confirmPassword: new FormControl('')
-  })
-}
-
-get name() {
-  return this.dadosCadastro.get('name');
-}
-
-get email() {
-  return this.dadosCadastro.get('email');
-}
-
-get password() {
-  return this.dadosCadastro.get('password');
-}
-
-get confirmPassword() {
-  return this.dadosCadastro.get('confirmPassword');
-}
-
-ngOnInit(): void {
-  this.tipoInputSenha = 'password';
-  this.tipoInputConfirmarSenha = 'password';
-}
-
-actionConfirmar() {
-  const val = this.dadosCadastro.value;
-  if (val.name && val.email && val.password) {
-    this.cadastroService.cadastrar(val.name, val.email, val.password, val.confirmPassword)
-      .subscribe(()=> {
-        console.log('contacriada')
-        this.router.navigateByUrl('login')
-      })
+      confirmPassword: new FormControl('', [Validators.required])
+    })
   }
-  console.log(this.dadosCadastro.value)
-  console.log('confirmar')
-}
 
-actionCancelar() {
-  this.router.navigate(['/login'])
-}
+  get name() {
+    return this.dadosCadastro.get('name');
+  }
 
-actionShowPassword() {
-  this.tipoInputSenha =  this.tipoInputSenha === 'password' ? 'text' : 'password';
-}
+  get email() {
+    return this.dadosCadastro.get('email');
+  }
 
-actionShowConfirmPassword() {
-  this.tipoInputConfirmarSenha = this.tipoInputConfirmarSenha === 'password' ? 'text' : 'password';
-}
+  get password() {
+    return this.dadosCadastro.get('password');
+  }
+
+  get confirmPassword() {
+    return this.dadosCadastro.get('confirmPassword');
+  }
+
+  ngOnInit(): void {
+    this.tipoInputSenha = 'password';
+    this.tipoInputConfirmarSenha = 'password';
+  }
+
+  actionConfirmar() {
+    const val = this.dadosCadastro.value;
+    if (val.name && val.email && val.password) {
+      this.cadastroService.cadastrar(val.name, val.email, val.password, val.confirmPassword)
+        .subscribe(() => {
+          this.router.navigateByUrl('login')
+        })
+    }
+  }
+
+  actionCancelar() {
+    this.router.navigate(['/login'])
+  }
+
+  actionShowPassword() {
+    this.tipoInputSenha = this.tipoInputSenha === 'password' ? 'text' : 'password';
+  }
+
+  actionShowConfirmPassword() {
+    this.tipoInputConfirmarSenha = this.tipoInputConfirmarSenha === 'password' ? 'text' : 'password';
+  }
 
 }

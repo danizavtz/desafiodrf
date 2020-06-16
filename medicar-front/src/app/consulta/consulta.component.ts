@@ -54,7 +54,6 @@ export class ConsultaComponent implements OnInit {
     this.router.navigate(['/lista'])
   }
   marcarConsultaAcao() {
-    console.log(this.dadosConsulta.value)
     const val = this.dadosConsulta.value
     if (val.agenda && val.hora) {
       this.consultaService.marcarConsulta(val.agenda, val.hora)
