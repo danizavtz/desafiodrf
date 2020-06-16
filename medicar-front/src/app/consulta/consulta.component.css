@@ -5,7 +5,6 @@ input {
     height: 40px;
     margin: 5px;
     color: #444444;
-
 }
 select {
     background: #FFFFFF;
@@ -25,16 +24,16 @@ select {
     font-weight: bold;
     padding: 0;
     border: none;
-    background: none;
 }
 input[type="submit"]:disabled {
     background: #D9F1F3;
     padding: 0;
     border: none;
-    background: none;
 }
 .cancelarbtn {
     height: 40px;
+    width: 160px;
+    margin: 10px;
     background: #FFFFFF;
     border-radius: 8px;
     color: #49B4BB;
