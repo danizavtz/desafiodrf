@@ -10,6 +10,7 @@ import { AuthenticationService } from '../authentication.service'
 })
 export class LoginComponent implements OnInit {
   dadosAcesso: FormGroup;
+  tipoInputPassword:string;
   
   constructor(
     private router: Router,
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.tipoInputPassword = 'password';
   }
 
   actionLogin() {
@@ -44,6 +46,10 @@ export class LoginComponent implements OnInit {
 
   actionCriarConta() {
     this.router.navigate(['/cadastro'])
+  }
+
+  actionMostrarSenha() {
+    this.tipoInputPassword = this.tipoInputPassword === 'password' ? 'text' : 'password'
   }
 
 }
