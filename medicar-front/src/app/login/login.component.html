@@ -32,8 +32,8 @@
                 </label>
                 <br>
             </div>
-            <button type="button" class="criarconta" (click)="actionCriarConta()" [disabled]="!dadosAcesso.valid">Criar Conta</button>
-            <input class="submitinput" id="submitinfo" type="submit" value="Acessar" [disabled]="!dadosAcesso.valid">
+            <button type="button" [ngClass]="{'criarconta': !dadosAcesso.valid || dadosAcesso.valid, 'criarcontainvalido': !dadosAcesso.valid && dadosAcesso.touched}" (click)="actionCriarConta()">Criar Conta</button>
+            <input class="submitinput" id="submitinfo" type="submit" value="Acessar" [disabled]="!dadosAcesso.valid && dadosAcesso.touched">
         </form>
     </div>
 </div>

@@ -41,7 +41,7 @@ input[type="submit"]:disabled {
     font-weight: bold;
     margin-right: 10px;
 }
-.criarconta:disabled {
+.criarcontainvalido {
     background: #D9F1F3;
     color: #49B4BB;;
     padding: 0;
