@@ -3,38 +3,30 @@
     box-sizing: border-box;
     border-radius: 4px;
     height: 40px;
-    margin: 5px;
+    margin: 6px;
     color: #444444;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
 }
-input:checked {
-    background: rebeccapurple;
-    color: red;
-  }
-label {                                                                                                                                                                                                                                                                           
+label {                        
+    margin-top: 1em;                                                                                                                                                                                                                                                   
     border-radius: 4px;
     color: #A8A8A8;
     display: block;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-}
-.rememberme {
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Roboto;
 }
 .submitinput {
     background: #49B4BB;
     border-radius: 8px;
-    width: 180px;
+    width: 160px;
     height: 40px;
     color: #FFFFFF;
     font-size: 1em;
     font-weight: bold;
-    font-family: Roboto;
+    border: 0;
+}
+input[type="submit"]:disabled {
+    background: #90D3D7;
+    color: #FFFFFF;
+    padding: 0;
+    border: none;
 }
 .criarconta {
     width: 180px;
@@ -47,7 +39,6 @@ label {
     background: none;
     font-size: 1em;
     font-weight: bold;
-    font-family: Roboto;
 }
 .criarconta:focus {
     background: #90D3D7;
@@ -77,9 +68,5 @@ img {
     justify-content: center;
     align-items: center;
     width: 130px;
-}
-.alert {
-    color: red;
-    font-family: Roboto;
-    font-size: .75em;
+    margin-bottom: 1.5em;
 }

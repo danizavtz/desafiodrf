@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { Especialidade } from '../especialidade';
 import { Medico } from '../medico';
@@ -29,13 +29,24 @@ export class ConsultaComponent implements OnInit {
     private agendaService: AgendaService,
     private consultaService: ConsultaService) {
     this.dadosConsulta = new FormGroup({
-      especialidade: new FormControl(''),
-      medico: new FormControl(''),
-      agenda: new FormControl(''),
-      hora: new FormControl('')
+      especialidade: new FormControl('', Validators.required),
+      medico: new FormControl({ value: '', disabled: true }, Validators.required),
+      agenda: new FormControl({ value: '', disabled: true }, Validators.required),
+      hora: new FormControl({ value: '', disabled: true }, Validators.required)
     })
   }
-
+  get especialidade() {
+    return this.dadosConsulta.get('especialidade');
+  }
+  get medico() {
+    return this.dadosConsulta.get('medico');
+  }
+  get agenda() {
+    return this.dadosConsulta.get('agenda');
+  }
+  get hora() {
+    return this.dadosConsulta.get('hora');
+  }
   ngOnInit(): void {
     this.getEspecialidades();
   }
@@ -60,12 +71,18 @@ export class ConsultaComponent implements OnInit {
 
   getMedicos(especialidade): void {
     this.medicoService.getMedicos(especialidade)
-      .subscribe(medicos => this.medicos = medicos);
+      .subscribe(medicos => {
+        this.medicos = medicos;
+        this.medicos.length > 0 ? this.dadosConsulta.get('medico').enable() : this.dadosConsulta.get('medico').disable();
+      });
   }
 
   getAgendas(idMedico): void {
     this.agendaService.getAgendas(idMedico)
-      .subscribe(agendas => this.agendas = agendas);
+      .subscribe(agendas => {
+        this.agendas = agendas;
+        this.agendas.length > 0 ? this.dadosConsulta.get('agenda').enable() : this.dadosConsulta.get('agenda').disable();
+      });
   }
 
   getHorariosAgenda(selecaoIdAgenda): Observable<Horario[]> {
@@ -75,15 +92,28 @@ export class ConsultaComponent implements OnInit {
   }
 
   onChangeEspecialidade(valor): void {
+    this.resetControllersState();
     this.getMedicos(valor)
   }
   onChangeMedico(selecaoIdMedico): void {
-    this.getAgendas(selecaoIdMedico);
+    this.getAgendas(selecaoIdMedico)
   }
 
   onChangeAgenda(selecaoIdAgenda): void {
     this.getHorariosAgenda(selecaoIdAgenda)
-      .subscribe(horarios => this.horarios = horarios)
+      .subscribe(horarios => {
+        this.horarios = horarios;
+        this.horarios.length > 0 ? this.dadosConsulta.get('hora').enable() : this.dadosConsulta.get('hora').disable();
+      })
+  }
+
+  private resetControllersState() : void {
+    this.medicos = [];
+    this.agendas = [];
+    this.horarios = [];
+    this.dadosConsulta.get('medico').disable();
+    this.dadosConsulta.get('agenda').disable();
+    this.dadosConsulta.get('hora').disable();
   }
 
 }

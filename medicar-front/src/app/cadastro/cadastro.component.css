@@ -5,7 +5,6 @@ input {
     height: 40px;
     margin: 5px;
     color: #444444;
-    font-family: Roboto;
 }
 .submitinput {
     width: 160px;
@@ -14,7 +13,8 @@ input {
     color: #FFFFFF;
     font-size: 1em;
     font-weight: bold;
-    font-family: Roboto;
+    padding: 0;
+    border: none;
 }
 .cancelarbtn {
     width: 160px;
@@ -27,7 +27,6 @@ input {
     background: none;
     font-size: 1em;
     font-weight: bold;
-    font-family: Roboto;
 }
 
 .wrapper {
@@ -54,10 +53,4 @@ img {
     justify-content: center;
     align-items: center;
     width: 130px;
-}
-
-.alert {
-    color: red;
-    font-family: Roboto;
-    font-size: .75em;
 }

@@ -22,7 +22,7 @@
             <select id="agenda" formControlName="agenda" (change)="onChangeAgenda($event.target.value)">
                 <option value="" selected disabled>Data</option>
                 <option *ngFor="let a of agendas" [value]="a.id">
-                    {{ a.dia }}</option>
+                    {{ a.dia | date: 'dd/MM/yyyy' }}</option>
             </select>
             <br>
             <select id="hora" formControlName="hora">

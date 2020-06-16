@@ -8,3 +8,13 @@
   body {
     font-family: Roboto;
   }
+
+  .alert {
+    color: red;
+    font-size: .75em;
+}
+
+.boxvertical{
+  display: flex;
+  flex-direction: column;
+}
