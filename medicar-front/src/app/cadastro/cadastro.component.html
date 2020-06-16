@@ -6,25 +6,40 @@
         <form [formGroup]="dadosCadastro" (ngSubmit)="actionConfirmar()">
             <p>Crie sua conta</p>
             <div class="boxvertical">
-                <input id="nome" type="text" placeholder="Nome" formControlName="name" />
+                <div>
+                    <input id="nome" type="text" placeholder="Nome" formControlName="name" />
+                </div>
                 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
                     <div *ngIf="name.errors.required">
                         Nome é obrigatório.
                     </div>
                 </div>
-                <input id="email" type="email" placeholder="Email" formControlName="email" />
+                <div>
+                    <input id="email" type="email" placeholder="Email" formControlName="email" />
+                </div>
                 <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
                     <div *ngIf="email.errors.required || email.errors.email">
                         Email é obrigatório.
                     </div>
                 </div>
-                <input id="senha" type="password" placeholder="Senha" formControlName="password" />
+                <div>
+                    <input id="senha" [type]="tipoInputSenha" placeholder="Senha" formControlName="password" />
+                    <span>
+                        <img src="assets/olho.png" alt="" (click)="actionShowPassword()">
+                    </span>
+                </div>
                 <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
                     <div *ngIf="password.errors.required">
                         Senha é obrigatório.
                     </div>
                 </div>
-                <input id="confirmarsenha" type="password" placeholder="Confirmar Senha" formControlName="confirmPassword">
+                <div>
+                    <input id="confirmarsenha" [type]="tipoInputConfirmarSenha" placeholder="Confirmar Senha"
+                        formControlName="confirmPassword">
+                    <span>
+                        <img src="assets/olho.png" alt="" (click)="actionShowConfirmPassword()">
+                    </span>
+                </div>
                 <br>
             </div>
             <button type="button" class="cancelarbtn" (click)="actionCancelar()">Cancelar</button>

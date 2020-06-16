@@ -10,6 +10,8 @@ import { CadastroService } from '../cadastro.service';
 })
 export class CadastroComponent implements OnInit {
   dadosCadastro: FormGroup;
+  tipoInputSenha: string;
+  tipoInputConfirmarSenha: string;
 
   constructor(
     private router: Router,
@@ -39,6 +41,8 @@ get confirmPassword() {
 }
 
 ngOnInit(): void {
+  this.tipoInputSenha = 'password';
+  this.tipoInputConfirmarSenha = 'password';
 }
 
 actionConfirmar() {
@@ -56,6 +60,14 @@ actionConfirmar() {
 
 actionCancelar() {
   this.router.navigate(['/login'])
+}
+
+actionShowPassword() {
+  this.tipoInputSenha =  this.tipoInputSenha === 'password' ? 'text' : 'password';
+}
+
+actionShowConfirmPassword() {
+  this.tipoInputConfirmarSenha = this.tipoInputConfirmarSenha === 'password' ? 'text' : 'password';
 }
 
 }
