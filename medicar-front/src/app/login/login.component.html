@@ -32,7 +32,7 @@
                 </label>
                 <br>
             </div>
-            <button type="button" class="criarconta" (click)="actionCriarConta()">Criar Conta</button>
+            <button type="button" class="criarconta" (click)="actionCriarConta()" [disabled]="!dadosAcesso.valid">Criar Conta</button>
             <input class="submitinput" id="submitinfo" type="submit" value="Acessar" [disabled]="!dadosAcesso.valid">
         </form>
     </div>
