@@ -48,7 +48,7 @@ input {
     height: 100%;
     width: 100%;
 }
-img {
+.imgtitletop {
     display: flex;
     justify-content: center;
     align-items: center;

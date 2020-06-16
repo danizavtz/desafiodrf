@@ -1,9 +1,10 @@
 <div class="wrapper1">
-    <img src="assets/Logo.png" />
+    <img class="imgtitletop" src="assets/Logo.png" />
 </div>
 <div class="wrapper">
     <div class="item">
         <form [formGroup]="dadosCadastro" (ngSubmit)="actionConfirmar()">
+            <p>Crie sua conta</p>
             <div class="boxvertical">
                 <input id="nome" type="text" placeholder="Nome" formControlName="name" />
                 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
