@@ -16,6 +16,12 @@ input {
     padding: 0;
     border: none;
 }
+input[type="submit"]:disabled {
+    background: #90D3D7;
+    color: #FFFFFF;
+    padding: 0;
+    border: none;
+}
 .cancelarbtn {
     width: 160px;
     height: 40px;
