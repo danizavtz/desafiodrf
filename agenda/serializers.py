@@ -1,6 +1,8 @@
 from agenda.models import Consulta, Agenda, HorarioAgendamento
 from rest_framework import serializers
 from medico.serializers import MedicoSerializer
+import datetime
+# from rest_framework.validators import 
 
 class HorarioAgendamentoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,6 +27,7 @@ class ConsultaSerializer(serializers.ModelSerializer):
         representation = super().to_representation(obj)
         agenda_representation = representation.pop('agenda')
         agenda_representation.pop('horarios')
+        agenda_representation.pop('id')
         for key in agenda_representation:
             representation[key] = agenda_representation[key]
 
@@ -38,3 +41,13 @@ class ConsultaSerializer(serializers.ModelSerializer):
 class NovaConsultaSerializer(serializers.Serializer):
     agenda_id = serializers.IntegerField()
     horario = serializers.TimeField()
+
+    def validate(self, data):
+        agendaidentifier = data['agenda_id']
+        try:
+            a = Agenda.objects.get(pk=agendaidentifier)
+            if a.dia < datetime.date.today():
+                raise serializers.ValidationError("Data deve ser maior ou igual ao dia de hoje")
+        except Agenda.DoesNotExist:
+            raise serializers.ValidationError("Agenda não encontrada")
+        return data

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
@@ -33,18 +34,23 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     def create(self, request):
         consulta_data = NovaConsultaSerializer(data=request.data)
         if consulta_data.is_valid():
-            agendaobj = Agenda.objects.get(pk=consulta_data.validated_data['agenda_id'])
-            horarioobj = HorarioAgendamento.objects.get(horario=consulta_data.validated_data['horario'])
-            currentUser = User.objects.get(username=self.request.user)
-            c = Consulta.objects.create(horario=horarioobj, agenda=agendaobj, user=currentUser)
-            serialized_data = ConsultaSerializer(instance=c)
-            return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+            try:
+                agendaobj = Agenda.objects.get(pk=consulta_data.validated_data['agenda_id'])
+                horarioobj = HorarioAgendamento.objects.get(horario=consulta_data.validated_data['horario'])
+                currentUser = User.objects.get(username=self.request.user)
+                c = Consulta.objects.create(horario=horarioobj, agenda=agendaobj, user=currentUser)
+                serialized_data = ConsultaSerializer(instance=c)
+                return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+            except IntegrityError:
+                content = {'consulta': 'Já existe uma consulta marcada neste dia e horário'}
+                return Response(content, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(consulta_data._errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk=None):
         try:
-            c = Consulta.objects.get(pk=pk)
+            currentUser = self.request.user
+            c = Consulta.objects.get(pk=pk, user=currentUser)
             c.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except Consulta.DoesNotExist:

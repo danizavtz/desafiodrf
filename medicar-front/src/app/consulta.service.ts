@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Consulta } from './consulta';
 import { Usuario } from './usuario';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
@@ -46,13 +46,12 @@ export class ConsultaService {
         'Authorization': `Token ${this.getUserAuthenticationToken()}`
       })
     })
-      .pipe(
-        catchError(this.handleError<Consulta>('marcarConsulta'))
+      .pipe(map(data => data),
+        catchError((err) => throwError(err))
       )
   }
 
   desmarcarConsulta(consultaId): any {
-    console.log(`${this.consultaUsuarioUrl}${consultaId}/`)
     return this.http.delete<any>(`${this.consultaUsuarioUrl}${consultaId}/`, {
       headers: new HttpHeaders({
         'Authorization': `Token ${this.getUserAuthenticationToken()}`
@@ -70,7 +69,6 @@ export class ConsultaService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
       return of(result as T)
     };
   }
