@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
   }
 
   actionCriarConta() {
-    this.router.navigate(['/cadastro'])
+    this.router.navigateByUrl('cadastro')
   }
 
   actionMostrarSenha() {

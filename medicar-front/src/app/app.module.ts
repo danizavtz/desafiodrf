@@ -10,6 +10,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { ListaComponent } from './lista/lista.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CanActivateRouteGuard } from './can-activate-route.guard';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [
+    CanActivateRouteGuard
   ],
   bootstrap: [AppComponent]
 })

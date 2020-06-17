@@ -4,13 +4,13 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { LoginComponent } from './login/login.component';
 import { ConsultaComponent } from  './consulta/consulta.component';
 import { ListaComponent } from './lista/lista.component';
-// import { AuthGuard } from './helpers';
+import { CanActivateRouteGuard } from './can-activate-route.guard';
 
 
 const routes: Routes = [
   { path : 'cadastro', component: CadastroComponent},
-  { path : 'consulta', component: ConsultaComponent},
-  { path : 'lista', component: ListaComponent},
+  { path : 'consulta', component: ConsultaComponent, canActivate: [CanActivateRouteGuard]},
+  { path : 'lista', component: ListaComponent, canActivate: [CanActivateRouteGuard]},
   { path: 'login', component: LoginComponent },
   { path : '', redirectTo: '/login', pathMatch: 'full'}
 ];

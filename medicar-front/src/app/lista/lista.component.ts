@@ -34,7 +34,7 @@ export class ListaComponent implements OnInit {
   }
 
   novaConsultaAction(): void {
-    this.router.navigate(['/consulta'])
+    this.router.navigateByUrl('consulta')
   }
 
   desmarcarAction(idConsulta): void {

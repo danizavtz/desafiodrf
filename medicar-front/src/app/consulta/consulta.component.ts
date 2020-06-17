@@ -53,7 +53,7 @@ export class ConsultaComponent implements OnInit {
     this.errorMsg = "";
   }
   cancelarAcao() {
-    this.router.navigate(['/lista'])
+    this.router.navigateByUrl('lista')
   }
   marcarConsultaAcao() {
     const val = this.dadosConsulta.value

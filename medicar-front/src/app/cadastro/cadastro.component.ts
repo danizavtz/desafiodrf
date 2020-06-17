@@ -70,7 +70,7 @@ export class CadastroComponent implements OnInit {
   }
 
   actionCancelar() {
-    this.router.navigate(['/login'])
+    this.router.navigateByUrl('login')
   }
 
   actionShowPassword() {
