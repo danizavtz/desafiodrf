@@ -22,6 +22,7 @@ export class ConsultaComponent implements OnInit {
   medicos: Medico[];
   agendas: Agenda[];
   horarios: Horario[];
+  errorMsg: string;
   constructor(
     private router: Router,
     private especialidadeService: EspecialidadesService,
@@ -49,6 +50,7 @@ export class ConsultaComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getEspecialidades();
+    this.errorMsg = "";
   }
   cancelarAcao() {
     this.router.navigate(['/lista'])
@@ -57,9 +59,25 @@ export class ConsultaComponent implements OnInit {
     const val = this.dadosConsulta.value
     if (val.agenda && val.hora) {
       this.consultaService.marcarConsulta(val.agenda, val.hora)
-        .subscribe(() => {
-          this.router.navigateByUrl('lista')
-        })
+        .subscribe(
+          () => {
+            this.router.navigateByUrl('lista')
+          },
+          err => {
+            try {
+              if (err.status === 400 && err.error) {
+                if (err.error.consulta) {
+                  this.errorMsg = err.error.consulta;
+                } else if (err.error.non_field_errors) {
+                  this.errorMsg = err.error.non_field_errors.shift()
+                }
+              } else {
+                this.errorMsg = 'Houve um erro ao tentar realizar marcação de consulta'
+              }
+            } catch (e) {
+              this.errorMsg = "Houve um erro ao efetuar uma consulta"
+            }
+          })
     }
   }
 
@@ -106,7 +124,7 @@ export class ConsultaComponent implements OnInit {
       })
   }
 
-  private resetControllersState() : void {
+  private resetControllersState(): void {
     this.medicos = [];
     this.agendas = [];
     this.horarios = [];
