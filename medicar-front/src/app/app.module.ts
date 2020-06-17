@@ -10,7 +10,6 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ConsultaComponent } from './consulta/consulta.component';
 import { ListaComponent } from './lista/lista.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { MessagesComponent } from './messages/messages.component';
     LoginComponent,
     CadastroComponent,
     ConsultaComponent,
-    ListaComponent,
-    MessagesComponent
+    ListaComponent
   ],
   imports: [
     BrowserModule,
