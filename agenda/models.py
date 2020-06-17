@@ -31,4 +31,5 @@ class Consulta(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     data_agendamento = models.DateTimeField(auto_now_add=True)
     class Meta:
+        ordering = ['agenda__dia','-horario']
         unique_together = ['horario', 'agenda']

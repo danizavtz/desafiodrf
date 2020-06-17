@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from agenda.models import Consulta, Agenda, HorarioAgendamento
 from rest_framework import viewsets
 from agenda.serializers import ConsultaSerializer, AgendaSerializer, HorarioAgendamentoSerializer, NovaConsultaSerializer
+import datetime
 
 class AgendaViewSet(viewsets.ModelViewSet):
     serializer_class = AgendaSerializer
@@ -28,7 +29,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     serializer_class = ConsultaSerializer
     def get_queryset(self):
         currentUser = self.request.user
-        queryset = Consulta.objects.filter(user=currentUser)
+        queryset = Consulta.objects.filter(user=currentUser, agenda__dia__gte=datetime.date.today())
         return queryset
 
     def create(self, request):
