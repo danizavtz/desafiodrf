@@ -56,7 +56,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk=None):
         try:
             currentUser = self.request.user
-            c = Consulta.objects.get(pk=pk, user=currentUser)
+            c = Consulta.objects.get(pk=pk, user=currentUser, agenda__dia__gte=datetime.date.today())
             c.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except Consulta.DoesNotExist:
