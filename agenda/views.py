@@ -12,6 +12,11 @@ class AgendaViewSet(viewsets.ModelViewSet):
     serializer_class = AgendaSerializer
     def get_queryset(self):
         queryset = Agenda.objects.all()
+
+        especialidade = self.request.query_params.get('especialidade', None)
+        if especialidade is not None:
+            queryset = queryset.filter(medico__especialidade=especialidade)
+
         medico = self.request.query_params.get('medico', None)
         if medico is not None:
             queryset = queryset.filter(medico=medico)
