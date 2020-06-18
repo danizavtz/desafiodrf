@@ -11,7 +11,7 @@
 4. Iniciar o backend
 `$ python manage.py runserver`
 5. A interface de administração deve estar disponível no endereco:
-`http://localhost:8000`
+`http://localhost:8000/admin`
 
 
 
