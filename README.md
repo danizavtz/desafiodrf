@@ -17,7 +17,7 @@
 
 ## Instalação frontend
 
-1. estando no diretório `medicar-front` instalar depedências:
+1. Estando no diretório `medicar-front` instalar depedências:
 `$ npm install`
 2. Executar o servidor de desenvolvimento do angular:
 `$ ng serve`
