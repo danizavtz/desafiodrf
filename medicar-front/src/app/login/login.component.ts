@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   dadosAcesso: FormGroup;
   tipoInputPassword: string;
   valorCheckBoxLembrarSenha: boolean;
+  errorMsg: string;
 
   constructor(
     private router: Router,
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.tipoInputPassword = 'password';
     this.verificarOpcaoLembrarSenha();
+    this.errorMsg = "";
   }
 
   verificarOpcaoLembrarSenha() {
@@ -76,6 +78,9 @@ export class LoginComponent implements OnInit {
             this.gravarCredenciaisAcesso()
           }
           this.router.navigateByUrl('lista')
+        },
+        () => {
+          this.errorMsg = "Impossível fazer login com as credenciais fornecidas."
         })
     }
   }
