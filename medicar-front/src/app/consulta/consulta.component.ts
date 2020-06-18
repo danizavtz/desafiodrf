@@ -104,7 +104,7 @@ export class ConsultaComponent implements OnInit {
 
   getHorariosAgenda(selecaoIdAgenda): Observable<Horario[]> {
     return of(this.agendas.find(item => {
-      return item.id = selecaoIdAgenda
+      return item.id == selecaoIdAgenda
     }).horarios);
   }
 
