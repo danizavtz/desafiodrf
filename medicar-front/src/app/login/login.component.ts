@@ -57,8 +57,11 @@ export class LoginComponent implements OnInit {
 
   colocarValoresCredenciaisForm() {
     try {
-      this.dadosAcesso.get('login').setValue(localStorage.getItem('login'));
-      this.dadosAcesso.get('senha').setValue(atob(localStorage.getItem('senha')));
+      const savedLogin = localStorage.getItem('login');
+      const savedPassword = localStorage.getItem('senha');
+      const decodedPwd = savedPassword ? atob(savedPassword) : '';
+      this.dadosAcesso.get('login').setValue(savedLogin ? savedLogin : '');
+      this.dadosAcesso.get('senha').setValue(decodedPwd);
     } catch (e) {
       console.error('houve um erro ao utilizar credenciais salvas. Detalhe: ' + e)
     }
