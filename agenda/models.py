@@ -25,6 +25,9 @@ class Agenda(models.Model):
         ordering = ['dia']
         unique_together = ['medico','dia']
 
+    def __str__(self):
+        return 'Agenda Dr(a): {}'.format(self.medico.nome)
+
 class Consulta(models.Model):
     horario = models.ForeignKey(HorarioAgendamento,on_delete=models.CASCADE, blank=False)
     agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, blank=False)
