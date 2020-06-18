@@ -71,6 +71,7 @@ tr:nth-child(even) {
 .datastyle {
     color: #49B4BB;
     text-align: center;
+    cursor: pointer;
 }
 
 img { 
