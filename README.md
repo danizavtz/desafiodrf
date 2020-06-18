@@ -17,6 +17,8 @@
 
 ## Instalação frontend
 
-1. estando no diretório `medicar-front` executar o comando, o angular deve ser instalado:
+1. estando no diretório `medicar-front` instalar depedências:
+`$ npm install`
+2. Executar o servidor de desenvolvimento do angular:
 `$ ng serve`
-2. Acessar endereço `http://localhost:4200`
+3. Acessar endereço `http://localhost:4200`
